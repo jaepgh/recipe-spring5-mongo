@@ -1,6 +1,7 @@
 package jaep.springframework.recipeapp.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -9,6 +10,7 @@ import java.util.Set;
 
 @Entity
 @Data
+@EqualsAndHashCode(exclude = {"ingredients","categories","notes"})
 public class Recipe {
 
     @Id
@@ -26,7 +28,7 @@ public class Recipe {
     private String directions;
 
     @Enumerated(value = EnumType.STRING)
-    private Difficulty dificulty;
+    private Difficulty difficulty;
 
     @Lob
     private byte[] image;
