@@ -2,24 +2,32 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.com">
 <head>
     <meta charset="UTF-8" />
-    <title>Title</title>
+    <title>Recipes Book</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+
+    </script>
 </head>
 <body>
-    <h1 th:text="'Welcome to our recipe cookbook!'"> </h1>
+<div class="container">
+    <h1 class="mt-5 mb-5" th:text="'Welcome to spring recipe cookbook!'"> </h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>DESCRIPTION</th>
-            </tr>
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">DESCRIPTION</th>
+        </tr>
         </thead>
         <tbody>
-            <tr th:each="recipe :${recipes}">
-                <td th:text="${recipe.id}"></td>
-                <td th:text="${recipe.description}"></td>
-            </tr>
+        <tr th:each="recipe :${recipes}">
+            <td th:text="${recipe.id}"></td>
+            <td th:text="${recipe.description}"></td>
+        </tr>
         </tbody>
     </table>
+</div>
 </body>
 </html>
