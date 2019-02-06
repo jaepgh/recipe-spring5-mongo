@@ -1,7 +1,6 @@
 package jaep.springframework.recipeapp.domain;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -10,7 +9,6 @@ import java.util.Set;
 
 @Entity
 @Data
-@EqualsAndHashCode(exclude = {"ingredients","categories","notes"})
 public class Recipe {
 
     @Id
@@ -34,13 +32,13 @@ public class Recipe {
     private byte[] image;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Set<Ingredient> ingredients  = new HashSet<>();;
+    private Set<Ingredient> ingredients  = new HashSet<>();
 
 
     @ManyToMany
     @JoinTable(name = "recipe_category", joinColumns = @JoinColumn(name="recipe_id"),
             inverseJoinColumns = @JoinColumn(name="category_id"))
-    private Set<Category> categories  = new HashSet<>();;
+    private Set<Category> categories  = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
