@@ -54,8 +54,9 @@ public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe> {
                     recipe.getIngredients().add(commandToIngredient.convert(comIn)));
         }
 
-        recipe.setNotes(commandToNotes.convert(recipeCommand.getNotes()));
-
+        if (recipeCommand.getNotes() != null) {
+            recipe.setNotes(commandToNotes.convert(recipeCommand.getNotes()));
+        }
 
         return recipe;
     }
