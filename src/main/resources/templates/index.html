@@ -23,6 +23,7 @@
             <th scope="col">DESCRIPTION</th>
             <th scope="col">VIEW</th>
             <th scope="col">UPDATE</th>
+            <th scope="col">DELETE</th>
         </tr>
         </thead>
         <tbody>
@@ -32,6 +33,7 @@
             <td th:text="${recipe.description}"></td>
             <td><a href="#" th:href="@{'/recipe/' + ${recipe.id}} + '/show'">View</a></td>
             <td><a href="#" th:href="@{'/recipe/' + ${recipe.id}} + '/update'">Update</a></td>
+            <td><a href="#" th:href="@{'/recipe/' + ${recipe.id}} + '/delete'">Delete</a></td>
         </tr>
         </tbody>
     </table>

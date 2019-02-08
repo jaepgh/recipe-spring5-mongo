@@ -1,5 +1,6 @@
 package jaep.springframework.recipeapp.services;
 
+import jaep.springframework.recipeapp.commands.RecipeCommand;
 import jaep.springframework.recipeapp.converters.RecipeCommandToRecipe;
 import jaep.springframework.recipeapp.converters.RecipeToRecipeCommand;
 import jaep.springframework.recipeapp.domain.Recipe;
@@ -59,5 +60,32 @@ public class RecipeServiceImplTest {
         assertNotNull(result);
         verify(recipeRepository, times(1)).findById(anyLong());
         verify(recipeRepository, never()).findAll();
+    }
+
+    @Test
+    public void saveRecipeCommand() {
+        Long id = 2L;
+        RecipeCommand command = new RecipeCommand();
+        command.setId(id);
+
+        when(recipeService.saveRecipeCommand(any()))
+                .thenReturn(command);
+
+        RecipeCommand result = recipeService.saveRecipeCommand(any());
+
+        assertNotNull(result);
+        assertEquals(id, result.getId());
+    }
+
+    @Test
+    public void findRecipeCommandById() {
+
+    }
+
+    @Test
+    public void deleteById() {
+
+        recipeService.deleteById(anyLong());
+        verify(recipeRepository, times(1)).deleteById(anyLong());
     }
 }
