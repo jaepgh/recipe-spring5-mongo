@@ -50,6 +50,6 @@ public class IngredientToIngredientCommandTest {
         assertEquals(ID, command.getId());
         assertEquals(AMOUNT, command.getAmount());
         assertEquals(DESCRIPTION, command.getDescription());
-        assertEquals(UNIT_OF_MEASURE.getId(), command.getUnitOfMeasure().getId());
+        assertEquals(UNIT_OF_MEASURE.getId(), command.getUom().getId());
     }
 }
