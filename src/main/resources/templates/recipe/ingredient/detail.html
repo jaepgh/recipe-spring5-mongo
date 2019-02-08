@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
+<head>
+    <title>Ingredient Detail</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/4.2.1/css/bootstrap.min.css}">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"
+            th:href="@{/webjars/bootstrap/4.2.1/js/bootstrap.min.js}">
+    </script>
+    <script src="/webjars/jquery/3.3.1-1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container mt-5 mb-5">
+        <div class="card col-md-6 col-sm-12 p-0 mx-auto">
+            <div class="card-header pl-3 pr-3 pt-3 mb-0 bg-success text-white">
+                <h4 th:text="@{ ${ingredient.description.toUpperCase()}}"></h4>
+            </div>
+            <div class="card-body">
+                <div>
+                    <label class="card-title"><b>Amount</b></label>
+                    <p th:text="@{${ingredient.amount}}">
+
+                    </p>
+                </div>
+                <div>
+                    <label class="card-title"><b>Unit of Measure</b></label>
+                    <p th:text="@{${ingredient.uom.uom}}">
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
