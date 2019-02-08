@@ -1,5 +1,6 @@
 package jaep.springframework.recipeapp.services;
 
+import jaep.springframework.recipeapp.commands.IngredientCommand;
 import jaep.springframework.recipeapp.commands.RecipeCommand;
 import jaep.springframework.recipeapp.converters.RecipeCommandToRecipe;
 import jaep.springframework.recipeapp.converters.RecipeToRecipeCommand;
@@ -77,6 +78,5 @@ public class RecipeServiceImpl implements RecipeService {
     public void deleteById(Long id) {
         recipeRepository.deleteById(id);
     }
-
 
 }

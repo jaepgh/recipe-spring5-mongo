@@ -1,5 +1,6 @@
 package jaep.springframework.recipeapp.services;
 
+import jaep.springframework.recipeapp.commands.IngredientCommand;
 import jaep.springframework.recipeapp.commands.RecipeCommand;
 import jaep.springframework.recipeapp.domain.Recipe;
 import java.util.Set;
@@ -11,4 +12,5 @@ public interface RecipeService {
     RecipeCommand saveRecipeCommand(RecipeCommand testRecipeCommand);
     RecipeCommand findRecipeCommandById(Long id);
     void deleteById(Long id);
+
 }
