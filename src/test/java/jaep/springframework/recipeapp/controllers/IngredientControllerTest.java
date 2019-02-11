@@ -58,13 +58,24 @@ public class IngredientControllerTest {
         IngredientCommand ingredient = new IngredientCommand();
         ingredient.setId(2L);
 
-        when(ingredientService.findIngredientCommandById(anyLong(), anyLong())).thenReturn(ingredient);
+        when(ingredientService.findIngredientCommandById(anyLong())).thenReturn(ingredient);
 
         mockMvc.perform(get("/recipe/1/ingredient/1/show"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/ingredient/detail"))
                 .andExpect(model().attributeExists("ingredient"));
 
-        verify(ingredientService, times(1)).findIngredientCommandById(anyLong(),anyLong());
+        verify(ingredientService, times(1)).findIngredientCommandById(anyLong());
+    }
+
+    @Test
+    public void deleteIngredient() throws Exception {
+
+        mockMvc.perform(get("/recipe/1/ingredient/1/delete"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/recipe/1/ingredients"));
+
+        verify(ingredientService, times(1)).deleteById(anyLong());
+
     }
 }

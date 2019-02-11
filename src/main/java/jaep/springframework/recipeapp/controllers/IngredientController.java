@@ -1,13 +1,12 @@
 package jaep.springframework.recipeapp.controllers;
 
+import jaep.springframework.recipeapp.commands.IngredientCommand;
 import jaep.springframework.recipeapp.services.IngredientService;
 import jaep.springframework.recipeapp.services.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @Slf4j
@@ -38,9 +37,29 @@ public class IngredientController {
 
         log.debug("Getting ingredients for reciped ID: " + recipeId);
         model.addAttribute("ingredient", ingredientService
-                .findIngredientCommandById(Long.valueOf(recipeId), Long.valueOf(ingredientId)));
+                .findIngredientCommandById(Long.valueOf(ingredientId)));
 
         return "recipe/ingredient/detail";
+    }
+
+    @PostMapping
+    @RequestMapping("/recipe/{recipeId}/ingredient/{ingredientId}/update")
+    public String saveOrUpdateIngredient(@PathVariable String recipeId,@PathVariable String ingredientId,
+                                         @ModelAttribute IngredientCommand command){
+
+        IngredientCommand saved = ingredientService.saveIngredientCommand(command);
+
+        return "/recipe/" + recipeId + "/ingredients";
+    }
+
+    @GetMapping
+    @RequestMapping("/recipe/{recipeId}/ingredient/{ingredientId}/delete")
+    public String deleteIngredient(@PathVariable String recipeId, @PathVariable String ingredientId){
+
+        log.debug("Deleting ingredient ID: " + ingredientId + " for recipe ID: " + recipeId);
+        ingredientService.deleteById(Long.valueOf(ingredientId));
+
+        return "redirect:/recipe/" + recipeId + "/ingredients";
     }
 }
 
