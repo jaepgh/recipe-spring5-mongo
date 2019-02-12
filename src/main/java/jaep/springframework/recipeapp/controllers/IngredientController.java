@@ -1,6 +1,7 @@
 package jaep.springframework.recipeapp.controllers;
 
 import jaep.springframework.recipeapp.commands.IngredientCommand;
+import jaep.springframework.recipeapp.commands.UnitOfMeasureCommand;
 import jaep.springframework.recipeapp.services.IngredientService;
 import jaep.springframework.recipeapp.services.RecipeService;
 import jaep.springframework.recipeapp.services.UnitOfMeasureService;
@@ -62,7 +63,10 @@ public class IngredientController {
     @RequestMapping("/recipe/{recipeId}/ingredient/new")
     public String newIngredient(@PathVariable String recipeId,
                                    Model model){
-        model.addAttribute("ingredient", new IngredientCommand());
+        IngredientCommand command = new IngredientCommand();
+        command.setUom(new UnitOfMeasureCommand());
+
+        model.addAttribute("ingredient", command);
         model.addAttribute("uomList", unitOfMeasureService.getAllUnitOfMeasurement());
         model.addAttribute("recipeId", recipeId);
 

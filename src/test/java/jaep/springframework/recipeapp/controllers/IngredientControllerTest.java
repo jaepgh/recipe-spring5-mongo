@@ -123,8 +123,6 @@ public class IngredientControllerTest {
                 .andExpect(model().attributeExists("ingredient"))
                 .andExpect(model().attributeExists("uomList"))
                 .andExpect(model().attributeExists("recipeId"));
-
-
     }
 
     @Test
