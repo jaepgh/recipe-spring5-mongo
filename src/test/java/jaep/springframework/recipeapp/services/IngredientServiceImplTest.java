@@ -6,12 +6,12 @@ import jaep.springframework.recipeapp.converters.UnitOfMeasureCommandToUnitOfMea
 import jaep.springframework.recipeapp.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import jaep.springframework.recipeapp.repositories.IngredientRepository;
 import jaep.springframework.recipeapp.repositories.RecipeRepository;
+import jaep.springframework.recipeapp.repositories.UnitOfMeasureRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -25,12 +25,15 @@ public class IngredientServiceImplTest {
     @Mock
     IngredientRepository ingredientRepository;
 
+    @Mock
+    UnitOfMeasureRepository unitOfMeasureRepository;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
         service = new IngredientServiceImpl(repository, ingredientRepository,
-                new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure()),
+                unitOfMeasureRepository, new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure()),
                 new IngredientToIngredientCommand(new UnitOfMeasureToUnitOfMeasureCommand()));
     }
 

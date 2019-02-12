@@ -2,10 +2,10 @@ package jaep.springframework.recipeapp.controllers;
 
 import jaep.springframework.recipeapp.commands.IngredientCommand;
 import jaep.springframework.recipeapp.commands.RecipeCommand;
-import jaep.springframework.recipeapp.domain.Ingredient;
+import jaep.springframework.recipeapp.domain.UnitOfMeasure;
 import jaep.springframework.recipeapp.services.IngredientService;
-import jaep.springframework.recipeapp.services.IngredientServiceImpl;
 import jaep.springframework.recipeapp.services.RecipeService;
+import jaep.springframework.recipeapp.services.UnitOfMeasureService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -13,10 +13,13 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import static org.junit.Assert.*;
+import java.util.HashSet;
+import java.util.Set;
+
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class IngredientControllerTest {
@@ -27,6 +30,9 @@ public class IngredientControllerTest {
     @Mock
     IngredientService ingredientService;
 
+    @Mock
+    UnitOfMeasureService unitOfMeasureService;
+
     IngredientController controller;
 
     MockMvc mockMvc;
@@ -34,7 +40,7 @@ public class IngredientControllerTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        controller = new IngredientController(service, ingredientService);
+        controller = new IngredientController(service, ingredientService, unitOfMeasureService);
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
 
@@ -76,6 +82,59 @@ public class IngredientControllerTest {
                 .andExpect(view().name("redirect:/recipe/1/ingredients"));
 
         verify(ingredientService, times(1)).deleteById(anyLong());
+
+    }
+
+    @Test
+    public void updateIngredient() throws Exception {
+        //Given
+        IngredientCommand command = new IngredientCommand();
+
+        //When
+        when(ingredientService.findIngredientCommandById(anyLong()))
+                .thenReturn(command);
+        when(unitOfMeasureService.getAllUnitOfMeasurement())
+                .thenReturn(new HashSet<>());
+
+        //Then
+        mockMvc.perform(get("/recipe/1/ingredient/1/update"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("recipe/ingredient/ingredientform"))
+                .andExpect(model().attributeExists("ingredient"))
+                .andExpect(model().attributeExists("uomList"))
+                .andExpect(model().attributeExists("recipeId"));
+    }
+
+    @Test
+    public void newIngredient() throws Exception {
+        //Given
+        IngredientCommand command = new IngredientCommand();
+
+        //When
+        when(ingredientService.findIngredientCommandById(anyLong()))
+                .thenReturn(command);
+        when(unitOfMeasureService.getAllUnitOfMeasurement())
+                .thenReturn(new HashSet<>());
+
+        //Then
+        mockMvc.perform(get("/recipe/1/ingredient/new"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("recipe/ingredient/ingredientform"))
+                .andExpect(model().attributeExists("ingredient"))
+                .andExpect(model().attributeExists("uomList"))
+                .andExpect(model().attributeExists("recipeId"));
+
+
+    }
+
+    @Test
+    public void saveOrUpdateIngredient() throws Exception {
+        mockMvc.perform(post("/recipe/1/ingredient/"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/recipe/1/ingredients"));
+
+        verify(ingredientService, times(1))
+                .saveIngredientCommand(any(), anyLong());
 
     }
 }

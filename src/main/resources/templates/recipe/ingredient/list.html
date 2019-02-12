@@ -15,10 +15,12 @@
 <body>
 <div class="container mt-5 mb-5">
 <table class="table table-hover">
-    <thead class="thead-dark">
+    <thead class="bg-success text-white">
     <tr>
         <th scope="col">ID</th>
         <th scope="col">DESCRIPTION</th>
+        <th scope="col">AMOUNT</th>
+        <th scope="col">UNIT OF MEAS.</th>
         <th scope="col">VIEW</th>
         <th scope="col">UPDATE</th>
         <th scope="col">DELETE</th>
@@ -28,6 +30,8 @@
     <tr th:each="ingredient :${recipe.ingredients}">
         <td th:text="${ingredient.id}"></td>
         <td th:text="${ingredient.description}"></td>
+        <td th:text="${ingredient.amount}"></td>
+        <td th:text="${ingredient.uom.uom}"></td>
         <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/' + ${ingredient.id}} + '/show'">View</a></td>
         <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/' + ${ingredient.id}} + '/update'">Update</a></td>
         <td><a href="#" th:href="@{'/recipe/' + ${recipe.id} + '/ingredient/' + ${ingredient.id}} + '/delete'">Delete</a></td>
