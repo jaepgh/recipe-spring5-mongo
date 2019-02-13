@@ -29,7 +29,7 @@ public class Recipe {
     private Difficulty difficulty;
 
     @Lob
-    private byte[] image;
+    private Byte[] image;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredients  = new HashSet<>();

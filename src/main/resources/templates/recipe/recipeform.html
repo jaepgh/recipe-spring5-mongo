@@ -12,12 +12,18 @@
             th:href="@{/webjars/bootstrap/4.2.1/js/bootstrap.min.js}">
     </script>
     <script src="/webjars/jquery/3.3.1-1/jquery.min.js"></script>
-
+    <style>
+        #chg-btn {
+            position: absolute;
+            top: 5%;
+            left: 70%;
+        }
+    </style>
 </head>
 <body>
 <div class="container mt-5">
     <div class="row">
-        <div class="col-md-12 col-md-offset-3 border border-primary rounded p-5 mb-5">
+        <div class="col-md-12 col-md-offset-3 border border-success rounded p-5 mb-5">
             <form  th:object="${recipe}" th:action="@{/recipe/}"  method="post">
                 <input type="hidden" th:field="*{id}"/>
                 <div class="pannel-group">
@@ -27,16 +33,16 @@
                         </div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-md-3 form-group">
+                                <div class="form-group col-12">
                                     <label>Recipe Description:</label>
                                     <input type="text" class="form-control" th:field="*{description}"/>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-3 form-group">
+                                <div class="col-md-4 form-group">
                                     <label>Categories:</label>
                                 </div>
-                                <div class="col-md-9 form-group">
+                                <div class="col-md-4 form-group">
                                     <div class="radio">
                                         <label>
                                             <input type="checkbox" value=""/>
@@ -50,6 +56,11 @@
                                         </label>
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                        <a href="#" id="chg-btn" class="btn btn-outline-success float-right mr-4"
+                                                                  th:href="@{'/recipe/' + ${id}} + '/image'"> CHG</a>
+                                        <img class="rounded mx-auto img-thumbnail" src="https://picsum.photos/300/300">
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3 form-group">
@@ -62,10 +73,10 @@
                                 </div>
                                 <div class="col-md-3 form-group">
                                     <label>Difficulty:</label>
-                                    <select class="form-control">
-                                        <option>Easy</option>
-                                        <option>Medium</option>
-                                        <option>Hard</option>
+                                    <select class="form-control" th:field="*{difficulty}">
+                                        <option th:each="diffVal : ${T(jaep.springframework.recipeapp.domain.Difficulty).values()}"
+                                        th:value="${diffVal.name()}"
+                                        th:text="${diffVal.name()}"></option>
                                     </select>
                                 </div>
                             </div>
@@ -136,7 +147,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-success btn-block btn-group-lg">Submit</button>
                 </div>
             </form>
         </div>
