@@ -59,7 +59,12 @@
                                 <div class="col-md-4">
                                         <a href="#" id="chg-btn" class="btn btn-outline-success float-right mr-4"
                                                                   th:href="@{'/recipe/' + ${id}} + '/image'"> CHG</a>
-                                        <img class="rounded mx-auto img-thumbnail" src="https://picsum.photos/300/300">
+                                            <span th:if="${recipe.getImage() != null}">
+                                                <img class="card-img" th:src="@{'/recipe/' + ${recipe.id} + '/recipeimage'}">
+                                            </span>
+                                            <span th:unless="${recipe.getImage() != null}">
+                                                <img class="card-img" src="https://www.maxpixel.net/static/photo/1x/Meatloaf-Recipe-Food-Egg-Loaf-Onion-Meat-31957.png">
+                                        </span>
                                 </div>
                             </div>
                             <div class="row">

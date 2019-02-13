@@ -1,15 +1,22 @@
 package jaep.springframework.recipeapp.controllers;
 
+import jaep.springframework.recipeapp.commands.RecipeCommand;
 import jaep.springframework.recipeapp.services.ImageService;
 import jaep.springframework.recipeapp.services.RecipeService;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.websocket.server.PathParam;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 @Controller
 public class ImageController {
@@ -28,8 +35,19 @@ public class ImageController {
     }
 
     @PostMapping("/recipe/{id}/image")
-    public String handleImagePost(@PathVariable String id, @PathParam("imagefile")MultipartFile file){
+    public String handleImagePost(@PathVariable String id, @RequestParam("imagefile")MultipartFile file){
         imageService.saveImageFile(Long.valueOf(id), file);
-        return "redirect:/recipe/" + id + "/show";
+        return "redirect:/recipe/" + id + "/update";
+    }
+
+    @GetMapping("/recipe/{id}/recipeimage")
+    public void renderImageFromDB(@PathVariable String id, HttpServletResponse response) throws IOException {
+        InputStream is = imageService.getImageById(Long.valueOf(id));
+
+        if (is != null){
+            response.setContentType("image/jpeg");
+            IOUtils.copy(is, response.getOutputStream());
+        }
+
     }
 }

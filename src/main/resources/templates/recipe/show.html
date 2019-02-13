@@ -52,7 +52,12 @@
                     </table>
                 </div>
                 <div class="col-3 mt-3">
-                    <img src="https://picsum.photos/300/300" class="card-img">
+                    <span th:if="${recipe.getImage() != null}">
+                        <img class="card-img" th:src="@{'/recipe/' + ${recipe.id} + '/recipeimage'}">
+                    </span>
+                    <span th:unless="${recipe.getImage() != null}">
+                        <img class="card-img" src="https://www.maxpixel.net/static/photo/1x/Meatloaf-Recipe-Food-Egg-Loaf-Onion-Meat-31957.png">
+                    </span>
                 </div>
             </div>
         </div>

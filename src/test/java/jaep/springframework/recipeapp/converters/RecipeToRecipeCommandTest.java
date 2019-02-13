@@ -19,7 +19,7 @@ public class RecipeToRecipeCommandTest {
     public static final Integer SERVINGS = 1;
     public static final Integer PREP_TIME = 10;
     public static final Notes NOTE = new Notes();
-    public static final byte[] IMAGE = new byte[40];
+    public static final Byte[] IMAGE = new Byte[40];
     public static final String DIRECTIONS = "Directions";
     public static final Difficulty DIFFICULTY = Difficulty.MODERATE;
     public static final String DESCRIPTION = "Description";
