@@ -5,6 +5,7 @@ import jaep.springframework.recipeapp.commands.RecipeCommand;
 import jaep.springframework.recipeapp.converters.RecipeCommandToRecipe;
 import jaep.springframework.recipeapp.converters.RecipeToRecipeCommand;
 import jaep.springframework.recipeapp.domain.Recipe;
+import jaep.springframework.recipeapp.exceptions.NotFoundException;
 import jaep.springframework.recipeapp.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -43,7 +44,7 @@ public class RecipeServiceImpl implements RecipeService {
         Optional<Recipe> recipeOptional =recipeRepository.findById(id);
 
         if(!recipeOptional.isPresent()){
-            throw new  RuntimeException("Recipe not found");
+            throw new  NotFoundException("Recipe not found ");
         }
 
         return recipeOptional.get();
@@ -67,7 +68,7 @@ public class RecipeServiceImpl implements RecipeService {
 
         if (!result.isPresent()){
             log.debug("No recipe found with ID: " + id);
-            throw new RuntimeException("No recipe found with ID: " + id);
+            throw new NotFoundException("No recipe found with ID: " + id);
         }
 
         return recipeToRecipeCommand.convert(result.get());

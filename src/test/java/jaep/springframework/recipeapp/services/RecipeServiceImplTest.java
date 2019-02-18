@@ -4,6 +4,7 @@ import jaep.springframework.recipeapp.commands.RecipeCommand;
 import jaep.springframework.recipeapp.converters.RecipeCommandToRecipe;
 import jaep.springframework.recipeapp.converters.RecipeToRecipeCommand;
 import jaep.springframework.recipeapp.domain.Recipe;
+import jaep.springframework.recipeapp.exceptions.NotFoundException;
 import jaep.springframework.recipeapp.repositories.RecipeRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -80,6 +81,15 @@ public class RecipeServiceImplTest {
     @Test
     public void findRecipeCommandById() {
 
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void getRecipeByIdTestNotFound(){
+        Optional<Recipe> recipe = Optional.empty();
+
+        when(recipeRepository.findById(anyLong())).thenReturn(recipe);
+
+        RecipeCommand returnRecipe = recipeService.findRecipeCommandById(1L);
     }
 
     @Test

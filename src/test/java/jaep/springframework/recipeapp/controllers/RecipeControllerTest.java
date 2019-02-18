@@ -2,6 +2,7 @@ package jaep.springframework.recipeapp.controllers;
 
 import jaep.springframework.recipeapp.commands.RecipeCommand;
 import jaep.springframework.recipeapp.domain.Recipe;
+import jaep.springframework.recipeapp.exceptions.NotFoundException;
 import jaep.springframework.recipeapp.services.RecipeService;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,6 +48,18 @@ public class RecipeControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/show"))
                 .andExpect(model().attributeExists("recipe"));
+    }
+
+
+    @Test
+    public void showByIdNotFound() throws Exception {
+        Recipe recipe = new Recipe();
+        recipe.setId(4L);
+
+        when(service.getRecipeById(anyLong())).thenThrow(NotFoundException.class);
+
+        mockMvc.perform(get("/recipe/1/show"))
+                .andExpect(status().isNotFound());
     }
 
 
