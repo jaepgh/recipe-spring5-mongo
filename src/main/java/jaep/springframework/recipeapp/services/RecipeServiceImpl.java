@@ -8,7 +8,11 @@ import jaep.springframework.recipeapp.domain.Recipe;
 import jaep.springframework.recipeapp.exceptions.NotFoundException;
 import jaep.springframework.recipeapp.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.transaction.Transactional;
 import java.util.HashSet;
@@ -44,7 +48,7 @@ public class RecipeServiceImpl implements RecipeService {
         Optional<Recipe> recipeOptional =recipeRepository.findById(id);
 
         if(!recipeOptional.isPresent()){
-            throw new  NotFoundException("Recipe not found ");
+            throw new  NotFoundException("No recipe found with ID: " + id);
         }
 
         return recipeOptional.get();
@@ -79,5 +83,4 @@ public class RecipeServiceImpl implements RecipeService {
     public void deleteById(Long id) {
         recipeRepository.deleteById(id);
     }
-
 }
