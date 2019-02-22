@@ -104,12 +104,13 @@ public class RecipeControllerTest {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("id", "2")
                 .param("description", "something")
+                .param("directions", "bla bla bla")
+                .param("url", "https://www.google.com/")
         )
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/recipe/4/show"));
 
     }
-
 
     @Test
     public void deleteRecipe() throws Exception {

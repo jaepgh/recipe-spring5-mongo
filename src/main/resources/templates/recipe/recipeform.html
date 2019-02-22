@@ -36,6 +36,11 @@
                                 <div class="form-group col-12">
                                     <label>Recipe Description:</label>
                                     <input type="text" class="form-control" th:field="*{description}"/>
+                                    <span  th:if="${#fields.hasErrors('description')}">
+                                        <ul class="alert alert-danger">
+                                            <li th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
+                                        </ul>
+                                    </span>
                                 </div>
                             </div>
                             <div class="row">
@@ -71,10 +76,20 @@
                                 <div class="col-md-3 form-group">
                                     <label>Prep Time:</label>
                                     <input type="text" class="form-control" th:field="*{prepTime}"/>
+                                    <span  th:if="${#fields.hasErrors('prepTime')}">
+                                        <ul class="alert alert-danger">
+                                            <li th:each="err : ${#fields.errors('prepTime')}" th:text="${err}"></li>
+                                        </ul>
+                                    </span>
                                 </div>
                                 <div class="col-md-3 form-group">
                                     <label>Cooktime:</label>
                                     <input type="text" class="form-control" th:field="*{cookTime}"/>
+                                    <span  th:if="${#fields.hasErrors('cookTime')}">
+                                        <ul class="alert alert-danger">
+                                            <li th:each="err : ${#fields.errors('cookTime')}" th:text="${err}"></li>
+                                        </ul>
+                                    </span>
                                 </div>
                                 <div class="col-md-3 form-group">
                                     <label>Difficulty:</label>
@@ -89,14 +104,29 @@
                                 <div class="col-md-3 form-group">
                                     <label>Servings:</label>
                                     <input type="text" class="form-control" th:field="*{servings}"/>
+                                    <span  th:if="${#fields.hasErrors('servings')}">
+                                        <ul class="alert alert-danger">
+                                            <li th:each="err : ${#fields.errors('servings')}" th:text="${err}"></li>
+                                        </ul>
+                                    </span>
                                 </div>
                                 <div class="col-md-3 form-group">
                                     <label>Source:</label>
                                     <input type="text" class="form-control" th:field="*{source}"/>
+                                    <span  th:if="${#fields.hasErrors('source')}">
+                                        <ul class="alert alert-danger">
+                                            <li th:each="err : ${#fields.errors('source')}" th:text="${err}"></li>
+                                        </ul>
+                                    </span>
                                 </div>
                                 <div class="col-md-3 form-group">
                                     <label>URL:</label>
                                     <input type="text" class="form-control" th:field="*{url}"/>
+                                    <span  th:if="${#fields.hasErrors('url')}">
+                                        <ul class="alert alert-danger">
+                                            <li th:each="err : ${#fields.errors('url')}" th:text="${err}"></li>
+                                        </ul>
+                                    </span>
                                 </div>
                             </div>
                         </div>
