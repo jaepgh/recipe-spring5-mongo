@@ -35,7 +35,7 @@ public class UnitOfMeasureServiceImpl implements UnitOfMeasureService {
     }
 
     @Override
-    public UnitOfMeasureCommand getUnitOfMeasurementId(Long id) {
+    public UnitOfMeasureCommand getUnitOfMeasurementId(String id) {
         Optional<UnitOfMeasure> result = repository.findById(id);
 
         if (!result.isPresent()){

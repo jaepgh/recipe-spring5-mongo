@@ -6,10 +6,10 @@ import java.util.Set;
 
 public interface RecipeService {
     Set<Recipe> getAllRecipes();
-    Recipe getRecipeById(Long id);
+    Recipe getRecipeById(String id);
 
     RecipeCommand saveRecipeCommand(RecipeCommand testRecipeCommand);
-    RecipeCommand findRecipeCommandById(Long id);
-    void deleteById(Long id);
+    RecipeCommand findRecipeCommandById(String id);
+    void deleteById(String id);
 
 }

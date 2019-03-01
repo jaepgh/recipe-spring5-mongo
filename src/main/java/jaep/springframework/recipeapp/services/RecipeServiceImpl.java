@@ -1,6 +1,5 @@
 package jaep.springframework.recipeapp.services;
 
-import jaep.springframework.recipeapp.commands.IngredientCommand;
 import jaep.springframework.recipeapp.commands.RecipeCommand;
 import jaep.springframework.recipeapp.converters.RecipeCommandToRecipe;
 import jaep.springframework.recipeapp.converters.RecipeToRecipeCommand;
@@ -8,13 +7,9 @@ import jaep.springframework.recipeapp.domain.Recipe;
 import jaep.springframework.recipeapp.exceptions.NotFoundException;
 import jaep.springframework.recipeapp.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.transaction.Transactional;
+import org.springframework.stereotype.Service;
+
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -44,7 +39,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public Recipe getRecipeById(Long id){
+    public Recipe getRecipeById(String id){
         Optional<Recipe> recipeOptional =recipeRepository.findById(id);
 
         if(!recipeOptional.isPresent()){
@@ -55,7 +50,6 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    @Transactional
     public RecipeCommand saveRecipeCommand(RecipeCommand command) {
         Recipe detachedRecipe = recipeCommandToRecipe.convert(command);
 
@@ -65,8 +59,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    @Transactional
-    public RecipeCommand findRecipeCommandById(Long id) {
+    public RecipeCommand findRecipeCommandById(String id) {
 
         Optional<Recipe> result = recipeRepository.findById(id);
 
@@ -79,8 +72,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    @Transactional
-    public void deleteById(Long id) {
+    public void deleteById(String id) {
         recipeRepository.deleteById(id);
     }
 }

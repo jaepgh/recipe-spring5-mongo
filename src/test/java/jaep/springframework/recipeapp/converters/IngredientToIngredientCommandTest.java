@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import static org.junit.Assert.*;
 
 public class IngredientToIngredientCommandTest {
-    public static final Long ID = 1L;
+    public static final String ID = "1L";
     public static final String DESCRIPTION = "Description";
     public static final BigDecimal AMOUNT = new BigDecimal(15);
     public static final UnitOfMeasure UNIT_OF_MEASURE = new UnitOfMeasure();
@@ -20,7 +20,7 @@ public class IngredientToIngredientCommandTest {
 
     @Before
     public void setUp() throws Exception {
-        UNIT_OF_MEASURE.setId(2L);
+        UNIT_OF_MEASURE.setId("2L");
         converter = new IngredientToIngredientCommand(new UnitOfMeasureToUnitOfMeasureCommand());
     }
 

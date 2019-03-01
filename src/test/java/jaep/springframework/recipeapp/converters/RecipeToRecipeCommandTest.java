@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 
 public class RecipeToRecipeCommandTest {
 
-    public static final Long ID = 1L;
+    public static final String ID = "1L";
     public static final String URL = "some url";
     public static final String SOURCE = "some source";
     public static final Integer SERVINGS = 1;
@@ -29,27 +29,27 @@ public class RecipeToRecipeCommandTest {
 
     static {
         Category c1 = new Category();
-        c1.setId(1L);
+        c1.setId("1L");
         CATEGORIES.add(c1);
         Category c2 = new Category();
-        c2.setId(2L);
+        c2.setId("2L");
         CATEGORIES.add(c2);
         Category c3 = new Category();
-        c3.setId(3L);
+        c3.setId("3L");
         CATEGORIES.add(c3);
 
 
         Ingredient i1 = new Ingredient();
-        i1.setId(1L);
+        i1.setId("1L");
         INGREDIENTS.add(i1);
         Ingredient i2 = new Ingredient();
-        i2.setId(2L);
+        i2.setId("2L");
         INGREDIENTS.add(i2);
         Ingredient i3 = new Ingredient();
-        i3.setId(3L);
+        i3.setId("3L");
         INGREDIENTS.add(i3);
         Ingredient i4 = new Ingredient();
-        i4.setId(4L);
+        i4.setId("4L");
         INGREDIENTS.add(i4);
     }
 
@@ -61,7 +61,7 @@ public class RecipeToRecipeCommandTest {
                 new IngredientToIngredientCommand(new UnitOfMeasureToUnitOfMeasureCommand()),
                 new CategoryToCategoryCommand());
 
-        NOTE.setId(4L);
+        NOTE.setId("4L");
     }
 
     @Test

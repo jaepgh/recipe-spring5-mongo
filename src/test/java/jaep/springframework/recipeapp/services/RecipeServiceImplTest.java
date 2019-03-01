@@ -53,19 +53,19 @@ public class RecipeServiceImplTest {
     @Test
     public void getRecipeById() {
         Recipe recipe = new Recipe();
-        recipe.setId(1L);
+        recipe.setId("1L");
 
-        when(recipeRepository.findById(anyLong())).thenReturn(Optional.of(recipe));
+        when(recipeRepository.findById(anyString())).thenReturn(Optional.of(recipe));
 
-        Recipe result = recipeService.getRecipeById(1L);
+        Recipe result = recipeService.getRecipeById("1L");
         assertNotNull(result);
-        verify(recipeRepository, times(1)).findById(anyLong());
+        verify(recipeRepository, times(1)).findById(anyString());
         verify(recipeRepository, never()).findAll();
     }
 
     @Test
     public void saveRecipeCommand() {
-        Long id = 2L;
+        String id = "2L";
         RecipeCommand command = new RecipeCommand();
         command.setId(id);
 
@@ -87,15 +87,15 @@ public class RecipeServiceImplTest {
     public void getRecipeByIdTestNotFound(){
         Optional<Recipe> recipe = Optional.empty();
 
-        when(recipeRepository.findById(anyLong())).thenReturn(recipe);
+        when(recipeRepository.findById(anyString())).thenReturn(recipe);
 
-        RecipeCommand returnRecipe = recipeService.findRecipeCommandById(1L);
+        RecipeCommand returnRecipe = recipeService.findRecipeCommandById("1L");
     }
 
     @Test
     public void deleteById() {
 
-        recipeService.deleteById(anyLong());
-        verify(recipeRepository, times(1)).deleteById(anyLong());
+        recipeService.deleteById(anyString());
+        verify(recipeRepository, times(1)).deleteById(anyString());
     }
 }

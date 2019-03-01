@@ -1,13 +1,11 @@
 package jaep.springframework.recipeapp.services;
 
-import jaep.springframework.recipeapp.commands.RecipeCommand;
 import jaep.springframework.recipeapp.domain.Recipe;
 import jaep.springframework.recipeapp.repositories.RecipeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.transaction.Transactional;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,8 +22,7 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    @Transactional
-    public void saveImageFile(Long recipeId, MultipartFile file) {
+    public void saveImageFile(String recipeId, MultipartFile file) {
         try{
             Recipe recipe = recipeRepository.findById(recipeId).get();
 
@@ -47,7 +44,7 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public InputStream getImageById(Long recipeId) {
+    public InputStream getImageById(String recipeId) {
         Recipe recipe = recipeRepository.findById(recipeId).get();
 
         if (recipe.getImage() == null){

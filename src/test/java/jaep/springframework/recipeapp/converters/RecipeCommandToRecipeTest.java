@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 
 public class RecipeCommandToRecipeTest {
 
-    public static final Long ID = 1L;
+    public static final String ID = "1L";
     public static final String URL = "some url";
     public static final String SOURCE = "some source";
     public static final Integer SERVINGS = 1;
@@ -31,27 +31,27 @@ public class RecipeCommandToRecipeTest {
 
     static {
         CategoryCommand c1 = new CategoryCommand();
-        c1.setId(1L);
+        c1.setId("1L");
         CATEGORIES.add(c1);
         CategoryCommand c2 = new CategoryCommand();
-        c2.setId(2L);
+        c2.setId("2L");
         CATEGORIES.add(c2);
         CategoryCommand c3 = new CategoryCommand();
-        c3.setId(3L);
+        c3.setId("3L");
         CATEGORIES.add(c3);
 
 
         IngredientCommand i1 = new IngredientCommand();
-        i1.setId(1L);
+        i1.setId("1L");
         INGREDIENTS.add(i1);
         IngredientCommand i2 = new IngredientCommand();
-        i2.setId(2L);
+        i2.setId("2L");
         INGREDIENTS.add(i2);
         IngredientCommand i3 = new IngredientCommand();
-        i3.setId(3L);
+        i3.setId("3L");
         INGREDIENTS.add(i3);
         IngredientCommand i4 = new IngredientCommand();
-        i4.setId(4L);
+        i4.setId("4L");
         INGREDIENTS.add(i4);
     }
 
@@ -64,7 +64,7 @@ public class RecipeCommandToRecipeTest {
                 new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure()),
                 new NotesCommandToNotes());
 
-        NOTE.setId(4L);
+        NOTE.setId("4L");
     }
 
     @Test

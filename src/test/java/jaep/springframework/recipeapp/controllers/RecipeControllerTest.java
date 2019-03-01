@@ -42,9 +42,9 @@ public class RecipeControllerTest {
     @Test
     public void showById() throws Exception {
         Recipe recipe = new Recipe();
-        recipe.setId(4L);
+        recipe.setId("4L");
 
-        when(service.getRecipeById(anyLong())).thenReturn(recipe);
+        when(service.getRecipeById(anyString())).thenReturn(recipe);
 
         mockMvc.perform(get("/recipe/1/show"))
                 .andExpect(status().isOk())
@@ -56,20 +56,13 @@ public class RecipeControllerTest {
     @Test
     public void showByIdNotFound() throws Exception {
 
-        when(service.getRecipeById(anyLong())).thenThrow(NotFoundException.class);
+        when(service.getRecipeById(anyString())).thenThrow(NotFoundException.class);
 
         mockMvc.perform(get("/recipe/1/show"))
                 .andExpect(status().isNotFound())
                 .andExpect(view().name("errors/404error"));
     }
 
-    @Test
-    public void showByIdNumberFormatException() throws Exception {
-
-        mockMvc.perform(get("/recipe/sss/show"))
-                .andExpect(status().isBadRequest())
-                .andExpect(view().name("errors/400error"));
-    }
 
     @Test
     public void newRecipe() throws Exception {
@@ -83,9 +76,9 @@ public class RecipeControllerTest {
     @Test
     public void updateRecipe() throws Exception {
         RecipeCommand command = new RecipeCommand();
-        command.setId(4L);
+        command.setId("4L");
 
-        when(service.findRecipeCommandById(anyLong())).thenReturn(command);
+        when(service.findRecipeCommandById(anyString())).thenReturn(command);
 
         mockMvc.perform(get("/recipe/4/update"))
                 .andExpect(status().isOk())
@@ -96,7 +89,7 @@ public class RecipeControllerTest {
     @Test
     public void saveOrUpdate() throws Exception {
         RecipeCommand command = new RecipeCommand();
-        command.setId(4L);
+        command.setId("4L");
 
         when(service.saveRecipeCommand(any())).thenReturn(command);
 
@@ -108,7 +101,7 @@ public class RecipeControllerTest {
                 .param("url", "https://www.google.com/")
         )
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/recipe/4/show"));
+                .andExpect(view().name("redirect:/recipe/4L/show"));
 
     }
 
@@ -118,6 +111,6 @@ public class RecipeControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/"));
 
-        verify(service, times(1)).deleteById(anyLong());
+        verify(service, times(1)).deleteById(anyString());
     }
 }

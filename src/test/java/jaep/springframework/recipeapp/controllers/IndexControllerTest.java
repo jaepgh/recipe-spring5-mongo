@@ -43,7 +43,7 @@ public class IndexControllerTest {
         recipes.add(new Recipe());
 
         Recipe aux = new Recipe();
-        aux.setId(5L);
+        aux.setId("5L");
         recipes.add(aux);
 
         when(recipeService.getAllRecipes()).thenReturn(recipes);

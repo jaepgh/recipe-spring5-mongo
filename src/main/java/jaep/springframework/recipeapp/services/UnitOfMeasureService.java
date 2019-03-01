@@ -6,5 +6,5 @@ import java.util.Set;
 
 public interface UnitOfMeasureService {
     Set<UnitOfMeasureCommand> getAllUnitOfMeasurement();
-    UnitOfMeasureCommand getUnitOfMeasurementId(Long id);
+    UnitOfMeasureCommand getUnitOfMeasurementId(String id);
 }

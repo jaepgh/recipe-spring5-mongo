@@ -13,6 +13,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -47,8 +48,8 @@ public class IngredientServiceImplTest {
 
     @Test
     public void deleteById() {
-        ingredientRepository.deleteById(anyLong());
+        ingredientRepository.deleteById(anyString());
 
-        verify(ingredientRepository, times(1)).deleteById(anyLong());
+        verify(ingredientRepository, times(1)).deleteById(anyString());
     }
 }
