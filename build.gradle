@@ -5,6 +5,7 @@
 plugins {
     id 'java'
     id 'maven'
+    id 'jacoco'
 }
 
 repositories {
@@ -31,6 +32,13 @@ dependencies {
     testCompile 'org.springframework.boot:spring-boot-starter-test:2.1.2.RELEASE'
 }
 
+jacocoTestReport{
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
+}
+
 group = 'jaep.springframework'
 version = '0.0.1-SNAPSHOT'
 description = 'recipe-app'
@@ -39,3 +47,4 @@ sourceCompatibility = '1.8'
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
+
