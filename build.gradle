@@ -5,7 +5,6 @@
 plugins {
     id 'java'
     id 'maven'
-    id 'jacoco'
 }
 
 repositories {
@@ -30,13 +29,6 @@ dependencies {
     runtime 'org.springframework.boot:spring-boot-devtools:2.1.2.RELEASE'
     runtime 'com.h2database:h2:1.4.197'
     testCompile 'org.springframework.boot:spring-boot-starter-test:2.1.2.RELEASE'
-}
-
-jacocoTestReport{
-    reports {
-        xml.enabled true
-        html.enabled true
-    }
 }
 
 group = 'jaep.springframework'
